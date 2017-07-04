@@ -5,6 +5,7 @@ var replace = require('gulp-html-replace');
 var includer = require('gulp-htmlincluder');
 var livereload = require('gulp-livereload');
 var spritecreator = require('gulp.spritesmith');
+let cleanCSS = require('gulp-clean-css');
 
 gulp.task('sprite', function(){
 	var spriteData = gulp.src('dev/img/icons/*.png')
@@ -26,6 +27,7 @@ gulp.task('server', function(){
 gulp.task('css', function(){
 	gulp.src('dev/css/**/*.css')
 		.pipe(concatCss('style.css'))
+		.pipe(cleanCSS({compatibility: 'ie8'}))
 		.pipe(gulp.dest('build/css/'))
 		.pipe(connect.reload());
 });
